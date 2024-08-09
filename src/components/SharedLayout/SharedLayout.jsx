@@ -1,8 +1,19 @@
-import React from 'react'
+import { Suspense } from 'react'
+import Header from './Header/Header'
+import Footer from './Footer'
+import { Outlet } from 'react-router-dom'
+import { Container } from './SharedLayout.styled'
 
 const SharedLayout = () => {
   return (
-    <div>SharedLayout</div>
+    <Container>
+      <Header />
+      <Suspense>
+        <Outlet/>
+      </Suspense>
+      <Footer />
+
+    </Container>
   )
 }
 
