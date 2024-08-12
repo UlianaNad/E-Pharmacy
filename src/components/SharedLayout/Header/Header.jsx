@@ -1,7 +1,6 @@
 import { useState } from "react";
 import whiteLogo from "../../../assets/white-logo.png";
 import greenLogo from "../../../assets/green-logo.png";
-// import svgSprite from "../../../assets/sprite.svg";
 import {
   HeroTextBlock,
   Line,
@@ -17,7 +16,7 @@ import {
 
 const Header = () => {
   const [isHomePage, setHomePage] = useState(true);
-  console.log(isHomePage);
+
 
   const HeroBlock = () => {
     return (

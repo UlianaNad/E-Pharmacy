@@ -5,6 +5,7 @@ import { NavLink } from "react-router-dom";
 export const WrapHero = styled.div`
   height: ${({ $isHomePage }) => ($isHomePage ? "800px" : "46px")};
   width: 1440px;
+  margin: 0 auto;
   background-color: ${({ $isHomePage }) =>
     $isHomePage ? "var(--green)" : "none"};
   background-image: ${({ $isHomePage }) =>
