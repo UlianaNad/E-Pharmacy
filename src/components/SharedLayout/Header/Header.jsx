@@ -1,8 +1,11 @@
-import { NavLink } from "react-router-dom";
-import logo from "../../../assets/white-logo.png";
-import svgSprite from "../../../assets/sprite.svg";
+import { useState } from "react";
+import whiteLogo from "../../../assets/white-logo.png";
+import greenLogo from "../../../assets/green-logo.png";
+// import svgSprite from "../../../assets/sprite.svg";
 import {
+  HeroTextBlock,
   Line,
+  LoginButton,
   MenuButton,
   RegisterButton,
   StyledLogo,
@@ -13,28 +16,51 @@ import {
 } from "./Header.styled";
 
 const Header = () => {
+  const [isHomePage, setHomePage] = useState(true);
+  console.log(isHomePage);
+
+  const HeroBlock = () => {
+    return (
+      <HeroTextBlock>
+        <h1>Your medication delivered</h1>
+        <p>Say goodbye to all your healthcare worries with us</p>
+      </HeroTextBlock>
+    );
+  };
+
   return (
-    <WrapHero>
+    <WrapHero $isHomePage={isHomePage}>
       <Wrapper>
-        <StyledLogo to="/">
-          <img src={logo} alt="logo" />
+        <StyledLogo
+          to="/"
+          onClick={() => setHomePage(true)}
+          $isHomePage={isHomePage}
+        >
+          <img src={isHomePage ? whiteLogo : greenLogo} alt="logo" />
           <span>E-Pharmacy</span>
         </StyledLogo>
         <WrapNavLinks>
-          <MenuButton to="/">Home</MenuButton>
-          <MenuButton to="store">Medicine store</MenuButton>
-          <MenuButton to="medicine">Medicine</MenuButton>
+          <MenuButton onClick={() => setHomePage(true)} to="/">
+            Home
+          </MenuButton>
+          <MenuButton onClick={() => setHomePage(false)} to="store">
+            Medicine store
+          </MenuButton>
+          <MenuButton onClick={() => setHomePage(false)} to="medicine">
+            Medicine
+          </MenuButton>
           <Line></Line>
         </WrapNavLinks>
         <UserBlockStyled>
-          <RegisterButton to="register">Register</RegisterButton>
-          <NavLink to="login">Login</NavLink>
+          <RegisterButton onClick={() => setHomePage(false)} to="register">
+            Register
+          </RegisterButton>
+          <LoginButton onClick={() => setHomePage(false)} to="login">
+            Login
+          </LoginButton>
         </UserBlockStyled>
       </Wrapper>
-      <div>
-        <h1>Your medication delivered</h1>
-        <p>Say goodbye to all your healthcare worries with us</p>
-      </div>
+      {isHomePage ? <HeroBlock /> : null}
     </WrapHero>
   );
 };
