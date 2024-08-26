@@ -1,56 +1,12 @@
 import React from "react";
 import sprite from "../../assets/sprite.svg";
-import {
-  BannerNumber,
-  BannerProcent,
-  BannerTitle,
-  FlexedDiv,
-  StyledBanner,
-  StyledBannersWrap,
-  StyledButton,
-} from "./HomePage.styled";
+
+import FirstBanner from "./FirstBanner/FirstBanner";
 
 const HomePage = () => {
   return (
     <div>
-      <StyledBannersWrap>
-        <StyledBanner>
-          <FlexedDiv>
-            <BannerNumber>
-              <span>1</span>
-            </BannerNumber>
-            <BannerTitle>Huge Sale</BannerTitle>
-          </FlexedDiv>
-          <FlexedDiv>
-            <BannerProcent>70%</BannerProcent>
-            <StyledButton>Shop now</StyledButton>
-          </FlexedDiv>
-        </StyledBanner>
-        <StyledBanner>
-          <FlexedDiv>
-            <BannerNumber>
-              <span>2</span>
-            </BannerNumber>
-            <BannerTitle>Secure delivery</BannerTitle>
-          </FlexedDiv>
-          <FlexedDiv>
-            <BannerProcent>100%</BannerProcent>
-            <StyledButton>Read more</StyledButton>
-          </FlexedDiv>
-        </StyledBanner>
-        <StyledBanner>
-          <FlexedDiv>
-            <BannerNumber>
-              <span>3</span>
-            </BannerNumber>
-            <BannerTitle>Off</BannerTitle>
-          </FlexedDiv>
-          <FlexedDiv>
-            <BannerProcent>35%</BannerProcent>
-            <StyledButton>Shop now</StyledButton>
-          </FlexedDiv>
-        </StyledBanner>
-      </StyledBannersWrap>
+     <FirstBanner/>
       <div>
         <h2>Your Nearest Medicine Store</h2>
         <span>Search for Medicine, Filter by your location</span>
