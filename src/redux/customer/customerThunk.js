@@ -9,7 +9,7 @@ export const registerThunk = createAsyncThunk(
   'auth/register',
   async (credentials, thunkAPI) => {
     try {
-      const response = await api.post('customers/register', credentials);
+      const response = await api.post('user/register', credentials);
       setToken(response.data.token);
       return response.data;
     } catch (error) {
@@ -22,7 +22,7 @@ export const loginThunk = createAsyncThunk(
   'auth/login',
   async (credentials, thunkAPI) => {
     try {
-      const response = await api.post('customers/login', credentials);
+      const response = await api.post('user/login', credentials);
       setToken(response.data.token);
       return response.data;
     } catch (error) {
@@ -35,7 +35,7 @@ export const updateCustomerThunk = createAsyncThunk(
   'customer/update',
   async (newCustomerData, ThunkAPI) => {
     try {
-      const { data } = await api.patch(`customers/update`, newCustomerData);
+      const { data } = await api.patch(`user/update`, newCustomerData);
       return data;
     } catch (error) {
       return ThunkAPI.rejectWithValue(error.response.data.message);
@@ -63,7 +63,7 @@ export const getCurrentThunk = createAsyncThunk(
 );
 
 export const logoutThunk = createAsyncThunk(
-  'auth/logout',
+  'user/logout',
   async (_, thunkAPI) => {
     try {
       await api.post('customers/logout');
@@ -78,7 +78,7 @@ export const logoutThunk = createAsyncThunk(
 
 
 export const forgotPassword = createAsyncThunk(
-  'customers/forgot-password',
+  'user/forgot-password',
   async (email, thunkAPI) => {
     try {
       const { data } = await api.post('customers/forgot-password', { email });
@@ -92,7 +92,7 @@ export const forgotPassword = createAsyncThunk(
 
 
 export const resetPassword = createAsyncThunk(
-  'customers/reset-password',
+  'user/reset-password',
   async (data, thunkAPI) => {
 
     try {
