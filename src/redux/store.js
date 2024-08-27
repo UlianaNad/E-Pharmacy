@@ -11,7 +11,7 @@ import {
 } from 'redux-persist';
 import storage from 'redux-persist/lib/storage';
 
-import { customerReducer } from './customer/customerThunk.js';
+import { customerReducer } from './customer/customerSlice.js';
 import { pharmacyReducer } from './pharmacy/pharmacySlice.js';
 import { productReducer } from './product/productSlice.js';
 
@@ -21,16 +21,16 @@ const persistCustomerConfig = {
   storage,
   whitelist: ['token'],
 };
-const persistPharmacyConfig = {
-  key:'pharmacy',
-};
-const persistProductConfig ={
-  key: 'product'
-};
+// const persistPharmacyConfig = {
+//   key:'pharmacy',
+// };
+// const persistProductConfig ={
+//   key: 'product'
+// };
 
 const persistedCustomer = persistReducer(persistCustomerConfig, customerReducer);
-const persistedPharmacy = persistReducer(persistPharmacyConfig, pharmacyReducer);
-const persistProduct = persistReducer(persistProductConfig, productReducer);
+// const persistedPharmacy = persistReducer(persistPharmacyConfig, pharmacyReducer);
+// const persistProduct = persistReducer(persistProductConfig, productReducer);
 
 // const persistGlobalConfig = {
 //   key: 'global',
@@ -43,8 +43,8 @@ const persistProduct = persistReducer(persistProductConfig, productReducer);
 const store = configureStore({
   reducer: {
     user: persistedCustomer,
-    pharmacy: persistedPharmacy,
-    product: persistProduct,
+    pharmacy: pharmacyReducer,
+    product: productReducer,
     // water: waterReducer,
     // global: persistedGlobal,
   },

@@ -1,44 +1,41 @@
-import React from "react";
-import sprite from "../../assets/sprite.svg";
+import React, { useEffect, useState } from "react";
 
 import FirstBanner from "./FirstBanner/FirstBanner";
+import { useDispatch } from "react-redux";
+import { getNearestPharmacyThunk } from "../../redux/pharmacy/pharmacyThunk";
+import PharmacyElem from "../../components/SharedLayout/PharmacyElem/PharmacyElem";
+import { WrapAddressComponent } from "./HomePage.styled";
 
 const HomePage = () => {
+  const dispatch = useDispatch();
+
+  const [pharmacies, setPharmacies] = useState([]);
+
+  useEffect(() => {
+    const nearPharmacy = dispatch(getNearestPharmacyThunk())
+      .unwrap()
+      .then((data) => {
+        setPharmacies(data);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+    setPharmacies(nearPharmacy);
+  }, [dispatch]);
+
   return (
     <div>
-     <FirstBanner/>
+      <FirstBanner />
       <div>
         <h2>Your Nearest Medicine Store</h2>
         <span>Search for Medicine, Filter by your location</span>
-        <ul>
-          <li>
-            <div>
-              <p>Huge Sale</p>
-              <div>
-                <svg width="16" height="16">
-                  <use href={`${sprite}#star`} fill="yellow" />
-                </svg>
-                <span>2</span>
-                <button>OPEN</button>
-              </div>
-            </div>
-            <div>
-              <div>
-                <svg width="16" height="16">
-                  <use href={`${sprite}#map-pin`} fill="yellow" />
-                </svg>
-                <p>Albenia G83</p>
-                <p>Seoul</p>
-              </div>
-              <div>
-                <svg width="16" height="16">
-                  <use href={`${sprite}#phone`} fill="yellow" />
-                </svg>
-                <span>717-24-2429</span>
-              </div>
-            </div>
-          </li>
-        </ul>
+        <WrapAddressComponent>
+          {pharmacies && pharmacies.length > 0
+            ? pharmacies.map((pharmacy) => (
+                <PharmacyElem key={pharmacy._id} pharmacy={pharmacy} />
+              ))
+            : null}
+        </WrapAddressComponent>
       </div>
     </div>
   );

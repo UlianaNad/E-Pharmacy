@@ -18,6 +18,7 @@ export const getNearestPharmacyThunk = createAsyncThunk(
     async(credentials, thunkApi) => {
         try {
             const res = await api.get('stores/nearest', credentials);
+          
             return res.data;
         } catch (error) {
             return thunkApi.rejectWithValue(error.response.data.message)
