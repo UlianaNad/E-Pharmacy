@@ -1,106 +1,82 @@
-import { createAsyncThunk } from '@reduxjs/toolkit';
-//import Notiflix from 'notiflix';
+import { createSlice } from '@reduxjs/toolkit';
 
-import { api } from '../../api/api.js';
-//import { NOTIFICATIONS, paramsForNotify } from '../../constants/notifications';
-import { clearToken, setToken } from '../../configApi/setToken';
+import { setToken } from '../../api/setToken.js';
 
-export const registerThunk = createAsyncThunk(
-  'auth/register',
-  async (credentials, thunkAPI) => {
-    try {
-      const response = await api.post('users/register', credentials);
-      setToken(response.data.token);
-      return response.data;
-    } catch (error) {
-      return thunkAPI.rejectWithValue(error.response.data.message);
-    }
-  }
-);
+import {
+  forgotPassword,
+  getCurrentThunk,
+  loginThunk,
+  logoutThunk,
+  registerThunk,
+  resetPassword,
+  updateCustomerThunk,
+} from './customerThunk.js';
 
-export const loginThunk = createAsyncThunk(
-  'auth/login',
-  async (credentials, thunkAPI) => {
-    try {
-      const response = await api.post('users/login', credentials);
-      setToken(response.data.token);
-      return response.data;
-    } catch (error) {
-      return thunkAPI.rejectWithValue(error.response.data.message);
-    }
-  }
-);
+const initialState = {
+  customer: {
+    customername: '',
+    email: '',
 
-export const updateUserThunk = createAsyncThunk(
-  'user/update',
-  async (newUserData, ThunkAPI) => {
-    try {
-      const { data } = await api.patch(`users/update`, newUserData);
-      return data;
-    } catch (error) {
-      return ThunkAPI.rejectWithValue(error.response.data.message);
-    }
-  }
-);
+  },
+  token: '',
+  isLoggedIn: false,
+  isRefreshing: false,
+};
 
-export const getCurrentThunk = createAsyncThunk(
-  'auth/refresh',
-  async (_, thunkAPI) => {
-    const state = thunkAPI.getState();
-    const savedToken = state.user.token;
-    if (savedToken) {
-      setToken(savedToken);
-    } else {
-      return thunkAPI.rejectWithValue('No token!');
-    }
-    try {
-      const response = await api.get('users/current');
-      return response.data;
-    } catch (error) {
-      return thunkAPI.rejectWithValue(error.message);
-    }
-  }
-);
+const customerSlices = createSlice({
+  name: 'customer',
+  initialState,
+  reducers: {
+    setStateToken: {
+      prepare: (token) => {
+        setToken(token);
+        return { payload: token };
+      },
+      reducer: (state, { payload }) => {
+        state.token = payload;
+      },
+    },
+  },
 
-export const logoutThunk = createAsyncThunk(
-  'auth/logout',
-  async (_, thunkAPI) => {
-    try {
-      await api.post('users/logout');
+  extraReducers: (builder) => {
+    builder
+      .addCase(getCurrentThunk.fulfilled, (state, { payload }) => {
+        state.customer = payload.customer;
+        state.isLoggedIn = true;
+        state.isRefreshing = false;
+      })
+      .addCase(getCurrentThunk.pending, (state) => {
+        state.isRefreshing = true;
+      })
+      .addCase(getCurrentThunk.rejected, (state) => {
+        state.isRefreshing = false;
+      })
+      .addCase(logoutThunk.fulfilled, (state) => {
+        state.customer = initialState.customer;
+        state.isLoggedIn = false;
+        state.token = '';
+      })
+      .addCase(updateCustomerThunk.fulfilled, (state, { payload }) => {
+        state.customer = payload.customer;
+      })
+      .addCase(forgotPassword.fulfilled, (state, action) => {
+        state.customer.email = action.payload;
+      })
+      .addCase(resetPassword.fulfilled, (state, action) => {
+        state.customer.password = action.payload;
+      })
+      .addCase(registerThunk.fulfilled, (state, action) => {
+        state.customer = action.payload.customer;
+        state.token = action.payload.token;
+        state.isLoggedIn = false;
+      })
+      .addCase(loginThunk.fulfilled, (state, action) => {
+        state.customer = action.payload.customer;
+        state.token = action.payload.token;
+        state.isLoggedIn = true;
+      });
+  },
+});
 
-      clearToken();
-    } catch (error) {
-    //  Notiflix.Notify.failure(NOTIFICATIONS.FAILURE.LOGOUT, paramsForNotify);
-      return thunkAPI.rejectWithValue(error.message);
-    }
-  }
-);
-
-
-export const forgotPassword = createAsyncThunk(
-  'users/forgot-password',
-  async (email, thunkAPI) => {
-    try {
-      const { data } = await api.post('users/forgot-password', { email });
-      return data;
-    }
-    catch (error) {
-      return thunkAPI.rejectWithValue(error.response.data.message)
-    }
-  }
-)
-
-
-export const resetPassword = createAsyncThunk(
-  'users/reset-password',
-  async (data, thunkAPI) => {
-
-    try {
-      const response = await api.post('users/reset-password', data);
-
-      return response.data;
-    } catch (error) {
-      return thunkAPI.rejectWithValue(error.response.data.message);
-    }
-  }
-);
+export const customerReducer = customerSlices.reducer;
+export const { setStateToken } = customerSlices.actions;
