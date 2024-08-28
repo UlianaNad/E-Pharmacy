@@ -6,6 +6,7 @@ export const StyledBannersWrap = styled.ul`
   align-items: center;
   gap: 28px;
   margin-top: 64px;
+  margin-bottom: 120px;
 `;
 
 export const StyledBanner = styled.li`
