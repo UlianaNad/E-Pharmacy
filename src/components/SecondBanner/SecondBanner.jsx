@@ -11,8 +11,6 @@ import { getNearestPharmacyThunk } from "../../redux/pharmacy/pharmacyThunk";
 
 const SecondBanner = () => {
   const [pharmacies, setPharmacies] = useState([]);
-  const [isOpen, setIsOpen] = useState(true);
-
   const dispatch = useDispatch();
   useEffect(() => {
     const nearPharmacy = dispatch(getNearestPharmacyThunk())
