@@ -7,6 +7,13 @@ export const ReviewCard = styled.li`
   border: 1px solid var(--grey);
   border-radius: 27px;
   background-color: #fdfdfd;
+
+  @media (max-width: 768px) {
+    &:last-child{
+        display:none;
+        margin-bottom: 16px;
+    }
+  }
 `;
 
 export const StyledPhoto = styled.img`

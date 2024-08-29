@@ -7,10 +7,18 @@ export const StyledBannersWrap = styled.ul`
   gap: 28px;
   margin-top: 64px;
   margin-bottom: 120px;
+  flex-wrap: wrap;
+  
+  @media (max-width: 768px) {
+    justify-content: start;
+    padding-right: 49px;
+    padding-left: 49px;
+  
+}
 `;
 
 export const StyledBanner = styled.li`
-  width: 321px;
+  width: 283px;
   border: 1.15px solid var(--grey);
   border-radius: 27px;
   padding: 14px 18px;

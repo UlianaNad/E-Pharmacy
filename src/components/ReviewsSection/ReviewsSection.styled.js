@@ -1,5 +1,11 @@
 import styled from "styled-components";
 
+export const WrapSection = styled.div`
+    @media (max-width: 768px) {
+        padding: 0px 32px;
+    }
+`;
+
 export const StyledText = styled.h2`
     font-size: 40px;
     font-weight: 600;

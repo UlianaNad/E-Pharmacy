@@ -2,6 +2,10 @@ import styled from "styled-components";
 
 export const WrapPromo = styled.div`
   margin-bottom: 120px;
+  padding-right: 32px;
+  padding-left: 32px;
+  overflow: hidden;
+  text-overflow: ellipsis;
 `;
 
 export const StyledFaetures = styled.ul`
@@ -10,6 +14,10 @@ export const StyledFaetures = styled.ul`
   align-items: center;
   gap: 48px;
   margin-top: 64px;
+  width: max-content;
+  @media (max-width: 768px) {
+    gap: 32px;
+  }
 `;
 
 export const StyledFeatureItem = styled.li`
@@ -35,30 +43,37 @@ export const GreenBackground = styled.div`
   border: none;
   border-radius: 32px;
   background-color: var(--green);
+
+  @media (max-width: 768px) {
+    width: 608px;
+    padding: 40px 48px;
+    flex-direction: column;
+    align-items: start;
+  }
 `;
 export const FaeturesTitle = styled.h2`
-    font-size: 48px;
-    font-weight: 600;
-    line-height: 1.1;
-    color: var(--grey);
-    margin-bottom: 24px;
+  font-size: 48px;
+  font-weight: 600;
+  line-height: 1.1;
+  color: var(--grey);
+  margin-bottom: 24px;
 `;
 export const FeaturesP = styled.p`
-    font-size: 16px;
-    line-height: 1.25;
-    color: var(--grey);
-    margin-bottom:40px ;
+  font-size: 16px;
+  line-height: 1.25;
+  color: var(--grey);
+  margin-bottom: 40px;
 `;
 
 export const StyledButton = styled.button`
-    border: 1px solid rgba(241,241,241, 0.5);
-    border-radius: 60px;
-    background-color: transparent;
-    padding: 13px 50px;
-    color: var(--grey);
-    font-weight: 500;
+  border: 1px solid rgba(241, 241, 241, 0.5);
+  border-radius: 60px;
+  background-color: transparent;
+  padding: 13px 50px;
+  color: var(--grey);
+  font-weight: 500;
 `;
 export const WrapLeftSide = styled.div`
-    width: 485px;
-    padding: 64px 0px;
+  width: 485px;
+  padding: 64px 0px;
 `;

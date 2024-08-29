@@ -4,7 +4,7 @@ import { NavLink } from "react-router-dom";
 
 export const WrapHero = styled.div`
   height: ${({ $isHomePage }) => ($isHomePage ? "800px" : "46px")};
-  width: 1440px;
+  max-width: 1440px;
   margin: 0 auto;
   background-color: ${({ $isHomePage }) =>
     $isHomePage ? "var(--green)" : "none"};
@@ -13,6 +13,11 @@ export const WrapHero = styled.div`
   background-repeat: no-repeat;
   background-position: center;
   color: var(--white);
+
+  @media (max-width: 768px) {
+    max-width:768px;
+    
+  }
 `;
 export const Wrapper = styled.div`
   display: flex;

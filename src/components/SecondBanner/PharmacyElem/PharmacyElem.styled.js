@@ -9,6 +9,11 @@ export const StyledLi = styled.li`
   background-color: #e7f1ed;
   position: relative;
   overflow: hidden;
+
+  @media (max-width: 768px) {
+    width: 262px;
+    margin-bottom: 16px;
+  }
 `;
 
 export const InfoBlock = styled.div`
@@ -98,4 +103,5 @@ export const StyledElem = styled.div`
   &:last-child {
     margin-left: 45px;
   }
+  
 `;

@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { StyledP, StyledText, WrapReviewsCards } from "./ReviewsSection.styled";
+import { StyledP, StyledText, WrapReviewsCards, WrapSection } from "./ReviewsSection.styled";
 import ReviewItem from "./ReviewItem/ReviewItem";
 import { useDispatch } from "react-redux";
 import { getReviewsThunk } from "../../redux/reviews/reviewsThunk";
@@ -21,13 +21,13 @@ const ReviewsSection = () => {
 
 
   return (
-    <div>
+    <WrapSection>
       <StyledText>Reviews</StyledText>
       <StyledP>Search for Medicine, Filter by your location</StyledP>
       <WrapReviewsCards>
         {reviews.map(review => <ReviewItem key={review._id} review={review}/>)}
       </WrapReviewsCards>
-    </div>
+    </WrapSection>
   );
 };
 

@@ -5,9 +5,16 @@ export const Wrapper = styled.div`
   width: 1440px;
   margin: 0 auto;
   background-color: var(--green);
+
+  @media (max-width: 768px) {
+    max-width:768px;
+  }
 `;
 export const WrapContent = styled.div`
   padding: 40px 128px;
+  @media (max-width: 768px) {
+    padding: 40px 49px;
+  }
 `;
 
 export const StyledLogo = styled(NavLink)`
