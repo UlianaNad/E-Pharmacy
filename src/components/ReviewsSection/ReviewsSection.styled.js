@@ -16,3 +16,10 @@ export const StyledP = styled.p`
     text-align: center;
     margin-bottom: 64px;
 `;
+
+export const WrapReviewsCards = styled.ul`
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 28px;
+`;

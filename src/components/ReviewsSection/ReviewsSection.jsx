@@ -1,20 +1,32 @@
-import React, { useState } from "react";
-import { StyledP, StyledText } from "./ReviewsSection.styled";
+import React, { useEffect, useState } from "react";
+import { StyledP, StyledText, WrapReviewsCards } from "./ReviewsSection.styled";
 import ReviewItem from "./ReviewItem/ReviewItem";
+import { useDispatch } from "react-redux";
+import { getReviewsThunk } from "../../redux/reviews/reviewsThunk";
 
 const ReviewsSection = () => {
 
     const [reviews, setReviews] = useState([]);
-
+    const dispatch = useDispatch();
+    useEffect(() => {
+      dispatch(getReviewsThunk())
+        .unwrap()
+        .then((data) => {
+            setReviews(data);
+        })
+        .catch((err) => {
+          console.log(err);
+        });
+    }, [dispatch]);
 
 
   return (
     <div>
       <StyledText>Reviews</StyledText>
       <StyledP>Search for Medicine, Filter by your location</StyledP>
-      <ul>
+      <WrapReviewsCards>
         {reviews.map(review => <ReviewItem key={review._id} review={review}/>)}
-      </ul>
+      </WrapReviewsCards>
     </div>
   );
 };
