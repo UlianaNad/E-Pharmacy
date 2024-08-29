@@ -11,7 +11,6 @@ export const ReviewCard = styled.li`
   @media (max-width: 768px) {
     &:last-child{
         display:none;
-        margin-bottom: 16px;
     }
   }
 `;
