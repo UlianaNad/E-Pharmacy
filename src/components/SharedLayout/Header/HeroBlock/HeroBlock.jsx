@@ -16,6 +16,10 @@ export const HeroTextBlock = styled.div`
   width: 610px;
   margin: 0 auto;
   margin-top: 145px;
+
+  @media (max-width: 768px) {
+    margin-top: 280px;
+  }
   h1 {
     font-size: 74px;
     font-weight: 600;

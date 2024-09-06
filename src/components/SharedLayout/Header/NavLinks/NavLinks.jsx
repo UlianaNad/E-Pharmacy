@@ -1,8 +1,9 @@
 import React from "react";
+import PropTypes from "prop-types";
 import { FlexForBurger, Line, LoginButton, MenuButton, RegisterButton, UserBlockStyled, WrapNavLinks } from "./NavLinks.styled";
 
 const NavLinks = ({setHomePage, isOpenBurgerMenu}) => {
-console.log(isOpenBurgerMenu)
+
   return (
     <FlexForBurger $isOpenBurgerMenu={isOpenBurgerMenu}>
       <WrapNavLinks $isOpenBurgerMenu={isOpenBurgerMenu}>
@@ -27,6 +28,11 @@ console.log(isOpenBurgerMenu)
       </UserBlockStyled>
     </FlexForBurger>
   );
+};
+
+NavLinks.propTypes = {
+  setHomePage: PropTypes.func.isRequired, 
+  isOpenBurgerMenu: PropTypes.bool.isRequired, 
 };
 
 export default NavLinks;
